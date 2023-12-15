@@ -48,7 +48,7 @@ const ModalA = ({
           id="onlyEvenCheckbox"
           label="Only even"
           checked={onlyEven}
-          onChange={() => handleCheckboxChange(filteredContacts)}
+          onChange={handleCheckboxChange}
         />
 
         {/* Search input for filtering contacts */}

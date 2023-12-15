@@ -12,6 +12,7 @@ const ModalB = ({
   loadMoreContacts,
   openModalC,
 }) => {
+  console.log(usContacts);
   return (
     // Bootstrap Modal component
     <Modal show={true} onHide={closeModal}>
@@ -48,7 +49,7 @@ const ModalB = ({
           id="onlyEvenCheckbox"
           label="Only even"
           checked={onlyEven}
-          onChange={() => handleCheckboxChange(usContacts)}
+          onChange={handleCheckboxChange}
         />
 
         {/* Search input for filtering contacts */}
@@ -60,7 +61,7 @@ const ModalB = ({
 
         {/* List of US contacts */}
         <ul>
-          {usContacts.length > 0 ? (
+          {usContacts != undefined ? (
             usContacts.map((contact) => (
               <li key={contact.id} onClick={() => openModalC(contact)}>
                 {contact.phone}

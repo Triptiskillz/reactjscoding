@@ -50,7 +50,7 @@ const Problem2 = () => {
   const fetchUsContacts = async () => {
     try {
       const response = await fetch(
-        `https://contact.mediusware.com/api/contacts/?country=US&page=1`
+        `https://contact.mediusware.com/api/country-contacts/United%20States/?page=1`
       );
       const data = await response.json();
       setUsContacts(data.results);
@@ -82,7 +82,7 @@ const Problem2 = () => {
       //   console.log("hello");
       const nextPage = currentUSPage + 1;
       const response = await fetch(
-        `https://contact.mediusware.com/api/contacts/?country=US&page=${nextPage}`
+        `https://contact.mediusware.com/api/country-contacts/United%20States/?page=1${nextPage}`
       );
       const data = await response.json();
       setCurrentUSPage(nextPage);
@@ -118,16 +118,16 @@ const Problem2 = () => {
   };
 
   // Handle checkbox change for filtering contacts
-  const handleCheckboxChange = (data) => {
+  const handleCheckboxChange = () => {
     setOnlyEven((prevOnlyEven) => !prevOnlyEven);
-    filterContacts(!onlyEven, data);
+    filterContacts(!onlyEven);
   };
 
   // Filter contacts based on checkbox and search term
-  const filterContacts = (even, data) => {
+  const filterContacts = (even) => {
     const filtered = even
-      ? data.filter((contact) => contact.id % 2 === 0)
-      : data;
+      ? contacts.filter((contact) => contact.id % 2 === 0)
+      : contacts;
     setFilteredContacts(filtered);
     setUsContacts(filtered);
   };
@@ -161,11 +161,16 @@ const Problem2 = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://contact.mediusware.com/api/contacts/?country=US&page=${currentUSPage}&search=${searchTerm}`
+          `https://contact.mediusware.com/api/country-contacts/United%20States/?search=${searchTerm}&page=${currentUSPage}`
         );
-        const data = await response.json();
-        setUsContacts(data.results);
-        setCurrentUSPage(currentUSPage + 1);
+        if (searchTerm) {
+          const data = await response.json();
+          setUsContacts(data.results);
+          setCurrentUSPage(currentUSPage + 1);
+        } else {
+          setUsContacts(contacts);
+          setCurrentUSPage(currentUSPage + 1);
+        }
       } catch (error) {
         console.error("Error fetching US contacts:", error);
       }
