@@ -81,12 +81,17 @@ const Problem2 = () => {
     try {
       //   console.log("hello");
       const nextPage = currentUSPage + 1;
+      console.log(nextPage);
       const response = await fetch(
-        `https://contact.mediusware.com/api/country-contacts/United%20States/?page=${nextPage}`
+        `https://contact.mediusware.com/api/country-contacts/United States/?page=${nextPage}`
       );
       const data = await response.json();
       setCurrentUSPage(nextPage);
-      setUsContacts((prevContacts) => [...prevContacts, ...data.results]);
+      if (nextPage > 2) {
+        setUsContacts((prevContacts) => [...prevContacts]);
+      } else {
+        setUsContacts((prevContacts) => [...prevContacts, ...data.results]);
+      }
     } catch (error) {
       console.error("Error loading more contacts:", error);
     }
