@@ -12,7 +12,6 @@ const ModalB = ({
   loadMoreContacts,
   openModalC,
 }) => {
-  console.log(usContacts);
   return (
     // Bootstrap Modal component
     <Modal show={true} onHide={closeModal}>

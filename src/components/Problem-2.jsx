@@ -27,12 +27,7 @@ const Problem2 = () => {
   const fetchContacts = async () => {
     try {
       const response = await fetch(
-        "https://contact.mediusware.com/api/contacts/?page=1",
-        {
-          headers: {
-            Origin: "http://localhost:3000",
-          },
-        }
+        "https://contact.mediusware.com/api/contacts/?page=1"
       );
 
       if (!response.ok) {
@@ -165,16 +160,15 @@ const Problem2 = () => {
     const searchTerm = event.target.value.toLowerCase();
     setTimeout(async () => {
       try {
-        const response = await fetch(
-          `https://contact.mediusware.com/api/country-contacts/United%20States/?search=${searchTerm}&page=${currentUSPage}`
-        );
         if (searchTerm) {
+          const response = await fetch(
+            `https://contact.mediusware.com/api/country-contacts/United%20States/?search=${searchTerm}&page=${currentUSPage}`
+          );
           const data = await response.json();
           setUsContacts(data.results);
-          setCurrentUSPage(currentUSPage + 1);
         } else {
-          setUsContacts(contacts);
-          setCurrentUSPage(currentUSPage + 1);
+          // Assuming filteredContacts is defined somewhere in your component's state
+          setUsContacts(filteredContacts);
         }
       } catch (error) {
         console.error("Error fetching US contacts:", error);
