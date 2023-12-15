@@ -1,0 +1,13 @@
+You will see two input fields name and status, by clicking submit the name and status will be shown at the table below the form.
+
+By Clicking Active it will only show the data that has the status Active
+
+By Clicking Completed it will only show the data that has status Completed
+
+By Clicking All if will show all the data and sort them by given order
+
+-Active tasks will show first
+
+-Completed will show after active Tasks
+
+-All other status (ie: Pending, Archive, etc) will show after Completed status Tasks 
