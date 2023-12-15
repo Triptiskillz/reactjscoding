@@ -82,7 +82,7 @@ const Problem2 = () => {
       //   console.log("hello");
       const nextPage = currentUSPage + 1;
       const response = await fetch(
-        `https://contact.mediusware.com/api/country-contacts/United%20States/?page=1${nextPage}`
+        `https://contact.mediusware.com/api/country-contacts/United%20States/?page=${nextPage}`
       );
       const data = await response.json();
       setCurrentUSPage(nextPage);
